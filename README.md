@@ -28,7 +28,7 @@ access any webserver in that private subnet, for example your NAS storage!
 
 2. Secure: Use [opensim-lickx](https://github.com/lickx/opensim-lickx) instead of stock OpenSim.
 This (only) allows requests from the /lslhttp folder even on blacklisted private networks.
-See commit 7503d1a23fd4a45742295cdb44223d2f7ac4033a if you would like to apply this
+See commit [7503d1a](https://github.com/lickx/opensim-lickx/commit/7503d1a23fd4a45742295cdb44223d2f7ac4033a) if you would like to apply this
 to your own OpenSim fork.
 
 

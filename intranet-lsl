@@ -1,0 +1,42 @@
+# Example for making a webserver on the private subnet with nginx on port 80
+
+server {
+    listen 80;
+
+    # the lsl script will do a llHttpRequest to 192.168.0.10/lslhttp/trash.php
+    server_name 192.168.0.10;
+
+    access_log /var/log/nginx/intranet-lsl_access.log;
+    error_log /var/log/nginx/intranet-lsl_error.log;
+
+    # within this folder, you'd make the lslhttp folder:
+    root /var/www/intranet-lsl;
+
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.php;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ =404;
+    }
+
+    # pass PHP scripts to FastCGI server
+    #
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+	
+        # With php-fpm (or other unix sockets):
+        fastcgi_pass unix:/run/php/php-fpm.sock;
+        # With php-cgi (or other tcp sockets):
+        #fastcgi_pass 127.0.0.1:9000;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
